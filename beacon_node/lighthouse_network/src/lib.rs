@@ -24,7 +24,7 @@ use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 use std::str::FromStr;
 
 /// Wrapper over a libp2p `PeerId` which implements `Serialize` and `Deserialize`
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct PeerIdSerialized(pub libp2p::PeerId);
 
 impl From<PeerIdSerialized> for PeerId {
