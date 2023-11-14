@@ -21,7 +21,7 @@ use libp2p::swarm::DialError;
 pub use listen_addr::*;
 
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
-use std::str::FromStr;
+use std::{hash::{Hash, Hasher}, str::FromStr};
 
 /// Wrapper over a libp2p `PeerId` which implements `Serialize` and `Deserialize`
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -30,6 +30,12 @@ pub struct PeerIdSerialized(pub libp2p::PeerId);
 impl From<PeerIdSerialized> for PeerId {
     fn from(peer_id: PeerIdSerialized) -> Self {
         peer_id.0
+    }
+}
+
+impl Hash for PeerIdSerialized {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.0.to_bytes().hash(state);
     }
 }
 
