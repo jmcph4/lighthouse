@@ -145,6 +145,13 @@ impl Timeouts {
     }
 }
 
+impl Default for Timeouts {
+    fn default() -> Self {
+        let seconds_per_slot = ChainSpec::default().seconds_per_slot;
+        Self::set_all(Duration::from_secs(seconds_per_slot))
+    }
+}
+
 /// A wrapper around `reqwest::Client` which provides convenience methods for interfacing with a
 /// Lighthouse Beacon Node HTTP server (`http_api`).
 #[derive(Clone)]
