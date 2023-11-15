@@ -112,7 +112,7 @@ impl fmt::Display for Error {
 
 /// A struct to define a variety of different timeouts for different validator tasks to ensure
 /// proper fallback behaviour.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Timeouts {
     pub attestation: Duration,
     pub attester_duties: Duration,
