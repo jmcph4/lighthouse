@@ -1,5 +1,5 @@
 use super::*;
-use kzg::BYTES_PER_COMMITMENT;
+use kzg_types::BYTES_PER_COMMITMENT;
 
 impl TestRandom for KzgProof {
     fn random_for_test(rng: &mut impl RngCore) -> Self {

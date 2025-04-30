@@ -7,9 +7,8 @@ use crate::{
 };
 use bls::Signature;
 use derivative::Derivative;
-use kzg::{Blob as KzgBlob, Kzg, KzgCommitment, KzgProof, BYTES_PER_BLOB, BYTES_PER_FIELD_ELEMENT};
+use kzg_types::{KzgCommitment, KzgProof};
 use merkle_proof::{merkle_root_from_branch, verify_merkle_proof, MerkleTreeError};
-use rand::Rng;
 use safe_arith::ArithError;
 use serde::{Deserialize, Serialize};
 use ssz::Encode;
@@ -237,35 +236,6 @@ impl<E: EthSpec> BlobSidecar<E> {
             BLOB_KZG_COMMITMENTS_INDEX,
             self.signed_block_header.message.body_root,
         )
-    }
-
-    pub fn random_valid<R: Rng>(rng: &mut R, kzg: &Kzg) -> Result<Self, String> {
-        let mut blob_bytes = vec![0u8; BYTES_PER_BLOB];
-        rng.fill_bytes(&mut blob_bytes);
-        // Ensure that the blob is canonical by ensuring that
-        // each field element contained in the blob is < BLS_MODULUS
-        for byte in blob_bytes.iter_mut().step_by(BYTES_PER_FIELD_ELEMENT) {
-            *byte = 0;
-        }
-
-        let blob = Blob::<E>::new(blob_bytes)
-            .map_err(|e| format!("error constructing random blob: {:?}", e))?;
-        let kzg_blob = KzgBlob::from_bytes(&blob).unwrap();
-
-        let commitment = kzg
-            .blob_to_kzg_commitment(&kzg_blob)
-            .map_err(|e| format!("error computing kzg commitment: {:?}", e))?;
-
-        let proof = kzg
-            .compute_blob_kzg_proof(&kzg_blob, commitment)
-            .map_err(|e| format!("error computing kzg proof: {:?}", e))?;
-
-        Ok(Self {
-            blob,
-            kzg_commitment: commitment,
-            kzg_proof: proof,
-            ..Self::empty()
-        })
     }
 
     #[allow(clippy::arithmetic_side_effects)]

@@ -68,6 +68,7 @@ members = [
     "crypto/eth2_keystore",
     "crypto/eth2_wallet",
     "crypto/kzg",
+    "crypto/kzg-types",
 
     "database_manager",
 
@@ -247,6 +248,7 @@ http_api = { path = "beacon_node/http_api" }
 initialized_validators = { path = "validator_client/initialized_validators" }
 int_to_bytes = { path = "consensus/int_to_bytes" }
 kzg = { path = "crypto/kzg" }
+kzg-types = { path = "crypto/kzg-types" }
 metrics = { path = "common/metrics" }
 lighthouse_network = { path = "beacon_node/lighthouse_network" }
 lighthouse_version = { path = "common/lighthouse_version" }

@@ -27,7 +27,8 @@ fixed_bytes = { workspace = true }
 hex = { workspace = true }
 int_to_bytes = { workspace = true }
 itertools = { workspace = true }
-kzg = { workspace = true }
+#kzg = { workspace = true }
+kzg-types = { workspace = true }
 maplit = { workspace = true }
 merkle_proof = { workspace = true }
 metastruct = "0.1.0"

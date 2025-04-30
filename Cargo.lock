@@ -3250,6 +3250,7 @@ dependencies = [
  "jsonwebtoken",
  "keccak-hash",
  "kzg",
+ "kzg-types",
  "lighthouse_version",
  "logging",
  "lru",
@@ -4943,6 +4944,26 @@ version = "0.1.0"
 dependencies = [
  "arbitrary",
  "c-kzg",
+ "criterion",
+ "derivative",
+ "ethereum_hashing",
+ "ethereum_serde_utils",
+ "ethereum_ssz",
+ "ethereum_ssz_derive",
+ "hex",
+ "kzg-types",
+ "rand 0.8.5",
+ "rust_eth_kzg",
+ "serde",
+ "serde_json",
+ "tree_hash",
+]
+
+[[package]]
+name = "kzg-types"
+version = "0.1.0"
+dependencies = [
+ "arbitrary",
  "criterion",
  "derivative",
  "ethereum_hashing",
@@ -9451,7 +9472,7 @@ dependencies = [
  "hex",
  "int_to_bytes",
  "itertools 0.10.5",
- "kzg",
+ "kzg-types",
  "maplit",
  "merkle_proof",
  "metastruct",
